@@ -1,0 +1,22 @@
+<div class="main posts-new">
+  <div class="container">
+    <h1 class="form-heading">編集する</h1>
+    <!-- form_tagで以下を囲み、送信先を指定するコード↓ -->
+    <%= form_tag("/posts/#{@post.id}/update") do %>
+      <div class="form">
+        <div class="form-body">
+          <!-- @postのエラーを表示するコード↓ updateアクションで条件文がelseになった場合、なぜエラーになったかを表示する。railsに初めから入っているもので、errors.full_messagesで入力なしも140字以上の時も対応できる。-->
+          <% @post.errors.full_messages.each do |message| %>
+            <div class="form-error">
+              <%= message %>
+            </div>
+          <% end %>
+          <!-- @postのエラーを表示するコード↑ -->
+          <textarea name=content><%= @post.content %></textarea> <!-- name=contentとすることで、textareaの名前がcontentとなり、updateアクションでparams[：content]とすると、extareaに書いた内容が入力できる-->
+          <input type="submit" value="保存">
+        </div>
+      </div>
+    <% end %>
+    <!-- form_tagで以下を囲み、送信先を指定するコード↑ -->
+  </div>
+</div>

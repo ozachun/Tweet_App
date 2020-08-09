@@ -1,0 +1,27 @@
+<div class="main users-edit">
+  <div class="container">
+    <div class="form-heading">ユーザー情報の編集</div>
+    <div class="form users-form">
+      <div class="form-body">
+        <!-- エラーメッセージを表示するためのHTML↓ -->
+        <% @user.errors.full_messages.each do |message| %>
+          <div class="form-error">
+            <%= message %>
+          </div>
+        <% end %>
+        <!-- エラーメッセージを表示するためのHTML↑ -->
+        <!-- ユーザー名とメアドを記入・保存するためのHTML↓ -->
+        <%= form_tag("/users/#{@user.id}/update", {multipart: true}) do %> <!-- form_tag("")で『do』をつけるのを忘れない！！ --><!-- {multipart: true}で、画像も送信できるようになる -->
+        <p>ユーザー名</p>
+        <input name="name" value="<%=@user.name %> " ><!-- value属性で、nameを初期値として表示できるようにした。 --><!-- name属性でnameを指定すると、userコントローラーのupdateアクションでparams[:name]が使え、inputの内容を取得できるようになった。 -->
+        <p>画像</p>
+        <input name="image" type="file"><!-- name属性でname、type属性を指定すると画像を設定できるようになる。 -->
+        <p>メールアドレス</p>
+        <input name="email" value="<%=@user.email %> " ><!-- value属性で、emailを初期値として表示できるようにした。 --><!-- name属性でemailを指定すると、userコントローラーのupdateアクションでparams[:email]が使え、inputの内容を取得できるようになった。 -->
+        <input type="submit" value="保存">
+        <% end %>
+        <!-- ユーザー名とメアドを記入・保存するためのHTML↑ -->
+      </div>
+    </div>
+  </div>
+</div>

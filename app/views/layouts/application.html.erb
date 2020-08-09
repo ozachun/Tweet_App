@@ -1,0 +1,67 @@
+<!-- application.html.erbでは共通のレイアウトを書いておくことができる。-->
+<!-- ヘッダーの部分を下に記入する　-->
+<!-- すでに作成されていた↓　-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TweetApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <!-- ヘッダーの共通部分(top.html,about.html,posts.index.htmlに適用)を下に記入する　-->
+    <header>
+      <div class="header-logo">
+        <% if @current_user %>
+          <%= link_to("TweetApp", "/posts/index") %><!-- ログインしているかどうかで、"TweetApp"をクリックする先が変更される -->
+        <% else %>
+          <%= link_to("TweetApp", "/") %>
+        <% end %>
+      </div>
+      <ul class="header-menus">
+        <% if @current_user %><!-- ログインできるかorログインできないかで、表示するヘッダーを変更している。 --><!--@current_useはapplication.controllerで定義している。-->
+        <li>
+          <%= link_to(@current_user.name, "/users/#{@current_user.id}") %><!-- 第一引数は英数字なので""で囲まなくていい -->
+        </li>
+          <li>
+            <%= link_to("投稿一覧", "/posts/index") %>
+          </li>
+          <li>
+            <%= link_to("新規投稿", "/posts/new") %>
+          </li>
+          <li>
+            <%= link_to("ユーザー一覧", "/users/index") %>
+          </li>
+          <li>
+            <%= link_to("ログアウト", "/logout",{method: :post}) %><!--logoutのルーティングがpostなのでmethodで指定する-->
+          </li>
+          <% else %>
+          <li>
+            <%= link_to("TweetAppとは", "/about") %>
+          </li>
+          <li>
+            <%= link_to("新規登録", "/signup") %>
+          </li>
+          <li>
+            <%= link_to("ログイン", "/login") %>
+          </li>
+        <% end %>
+      </ul>
+    </header>
+    <!-- ヘッダーの共通部分を上に記入する　-->
+    <!-- 投稿に成功した場合(作成・編集・削除の3パターン分に対応)flash[:notice]に代入されたメッセージを表示させるコード -->
+    <% if flash[:notice] %>
+      <div class="flash">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+    <!-- 投稿に成功した場合(作成・編集・削除の3パターン分に対応)flash[:notice]に代入されたメッセージを表示させるコード -->
+    <%= yield %><!-- ここにtop.html,about.html,posts.index.htmlの共通部分以外のhtmlがそれぞれ代入され表示される --><!--逆に、applicayion.htmlは全てのアクションから呼び出されている-->
+  </body>
+</html>
+
+<!-- すでに作成されていた↑　-->

@@ -1,0 +1,19 @@
+<div class="main users-index">
+  <div class="container">
+    <h1 class="users-heading">ユーザー一覧</h1>
+    <!-- ユーザー一覧を表示するコード↓ -->
+    <% @users.each do |user| %>
+      <div class="users-index-item">
+        <!-- <img>タグを用いて、プロフィール画像を表示するコード↓-->
+        <div class="user-left">
+          <img src="<%= "/user_images/#{user.image_name}" %>"><!--public/user_imagesのファイルに画像が保存されているのでそこを指定する-->
+        </div>
+        <!-- <img>タグを用いて、プロフィール画像を表示するコード↑-->
+        <div class="user-right">
+          <%= link_to(user.name, "/users/#{user.id}") %>
+        </div>
+      </div>
+    <% end %>
+    <!-- ユーザー一覧を表示するコード↑ -->
+  </div>
+</div>

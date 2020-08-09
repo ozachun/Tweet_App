@@ -1,0 +1,12 @@
+<div class="main user-show">
+  <div class="container">
+    <div class="user">
+      <img src="<%= "/user_images/#{@user.image_name}"%>"><!-- <img>タグを用いて、プロフィール画像publicのuser_imageを表示している -->
+      <h2><%= @user.name %></h2><!-- ユーザー名表示 -->
+      <p><%= @user.email %></p><!-- メアドを表示 -->
+    </div>
+    <% if @user.id == @current_user.id %>
+    <%= link_to("編集", "/users/#{@user.id}/edit") %>
+    <% end %>
+  </div>
+</div>

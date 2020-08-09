@@ -1,0 +1,25 @@
+<div class="main users-new">
+  <div class="container">
+    <div class="form-heading">新規ユーザー登録</div>
+    <div class="form users-form">
+      <div class="form-body">
+        <% @user.errors.full_messages.each do |message| %>
+          <div class="form-error">
+            <%= message %>
+          </div>
+        <% end %>
+        <%= form_tag("/users/create") do %>
+          <p>ユーザー名</p>
+          <input name="name" value="<%=@user.name%> "><!-- <textarea></textarea>では、複数行のテキストを記入できたが、<input>では一行のみ記入可能 -->
+          <p>画像</p>
+          <input name="image_name" type="file" >
+          <p>メールアドレス</p>
+          <input name="email" value="<%=@user.email%> "><!-- value属性を用いることで、valueに代入された値を初期値として表示することができる。 -->
+          <p>パスワード</p>
+          <input type="password" name="password" value="<%=@user.password%> " ><!--type属性でpasswordを指定することで、パスワードを入力した時に伏字になるように表示できるようになる。-->
+          <input type="submit" value="新規登録">
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

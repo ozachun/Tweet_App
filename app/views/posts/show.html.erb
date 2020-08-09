@@ -1,0 +1,19 @@
+<!- showページの作成に必要なviewの作成(HTML) ->
+
+<div class="main posts-show">
+  <div class="container">
+    <div class="posts-show-item">
+     <p>
+     <%=  @post.content %>
+     </p>
+     <div class="post-time">
+      <!-- @postのcreated_atカラムのデータを表示してください -->
+      <%= @post.created_at  %>
+    </div>
+    <div class="post-menus">
+        <%= link_to("編集", "/posts/#{@post.id}/edit") %><!-- 第二引数では、@postのidの値を取得している。 なんで、link_toでgetを参照するのに{method:"post"}をつけないのか。ルーティングもgetのままでいいのか？→投稿編集ページを開いているだけだから。-->
+        <%= link_to("削除", "/posts/#{@post.id}/destroy",{method:"post"}) %><!--　link_to()は、ルーティング内のgetしか探さないので、{method:"post"}を第３引数に入れることで、ルーティングのpostを参照させるようにする。 -->
+    </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<!-- newページの作成に必要なviewの作成(HTML) -->
+
+<!-- headerはapplication.htmlで共通部分として記入 -->
+<div class="main posts-new">
+  <div class="container">
+    <h1 class="form-heading">投稿する</h1>
+<!-- 新規投稿のテキストエリア作成コード↓ -->
+  <%= form_tag("/posts/create") do %><!-- 新規投稿ボタンを押すと/posts/createというURLを検索したことになる -->
+    <div class="form">
+      <div class="form-body">
+        <!-- 新規投稿した場合に、@postのエラーメッセージが表示されるようにする↓ -->
+        <!-- newアクションで定義された@postに対してPostで定義された条件(内容なし、140字以上)に当てはまるかどうかで、もともとrubyに備わっているerrorsメッセージを表示している。 -->
+         <% @post.errors.full_messages.each do |message| %>
+             <%= message %>
+           </div>
+         <% end %>
+        <!-- 新規投稿した場合に、@postのエラーメッセージが表示されるようにする↑ -->
+        <textarea name="content" > <%= @post.content %> </textarea> <!-- 新規投稿の本文がcontentに保存される。初め@post.contentには何も入っていないが、Postの条件にはじかれた時に、投稿直前の内容を取得できる。 -->
+        <input type="submit" value="投稿"> <!-- 新規投稿の投稿ボタン -->
+      </div>
+    </div>
+  <% end %>
+<!-- 新規投稿のテキストエリア作成コード↑ -->
+  </div>

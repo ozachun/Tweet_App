@@ -1,0 +1,14 @@
+
+<div class="main posts-index">
+  <div class="container">
+    <% @posts.each do |post| %>
+      <div class="posts-index-item">
+        <%= link_to(post.content,"/posts/#{post.id}") %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!- @を用いることで、posts_controllerのactionで定義した変数を用いることができる ->
+<!- link_to("表示する文字", "URL") ->
+<!- #{}で囲むことで変数を含んだ文字でも出力ができる ->
